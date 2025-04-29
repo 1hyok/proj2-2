@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  cpp-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
+    working_dir: /app
+    command: /bin/bash
+    stdin_open: true  # docker run -i와 동일
+    tty: true        # docker run -t와 동일
