@@ -51,26 +51,28 @@ uint64_t page::find(char *key){
 	// Please implement this function in project 2.
 	uint64_t val = 0;
 
-	const auto& off_arr = (uint16_t *)(hdr.get_offset_array());
+	const uint16_t *off_arr = (uint16_t *)(hdr.get_offset_array());
 	for(int i = 0; i < hdr.get_num_data(); i++){
-		const auto curr = get_key((void *)((uint64_t)this + off_arr[i]));
-		if(!strcmp(curr, key))
-			return get_val(curr);
+		const char *curr = get_key((void *)((uint64_t)this + off_arr[i]));
+		if(!strcmp(curr, key)){
+			return get_val((void *)curr);
+		}
 	}
 	return val;
 }
 
 bool page::insert(char *key,uint64_t val){
 	// Please implement this function in project 2.
-	const auto key_size = strlen(key) + 1;
-	const auto record_size = sizeof(uint16_t) + key_size + sizeof(val);
+		
+	const size_t key_size = strlen(key) + 1;
+	const uint16_t record_size = sizeof(uint16_t) + key_size + sizeof(val);
 
 	if(is_full(record_size) || find(key))
 		return false;
 		
-	auto off_arr = (uint16_t *)(hdr.get_offset_array());
+	uint16_t *off_arr = (uint16_t *)(hdr.get_offset_array());
 	hdr.set_data_region_off(hdr.get_data_region_off()-record_size);
-	const auto offset = hdr.get_data_region_off() + 1;
+	const uint16_t offset = hdr.get_data_region_off() + 1;
 	
 	put2byte((void *)((uint64_t)this + offset), record_size);
 	strcpy((char *)((uint64_t)this + offset + sizeof(record_size)), key);
@@ -78,7 +80,7 @@ bool page::insert(char *key,uint64_t val){
 
 	hdr.set_num_data(hdr.get_num_data() + 1);
 
-	const auto num_data = hdr.get_num_data();
+	const uint32_t num_data = hdr.get_num_data();
 	int insert_idx = num_data - 1;
 	for(int i = 0; i < num_data - 1; i++)
 		if(strcmp(get_key((void *)((uint64_t)this + off_arr[i])), key) >= 0){
