@@ -1,0 +1,25 @@
+{
+    "files.associations": {
+        "array": "cpp",
+        "string": "cpp",
+        "string_view": "cpp",
+        "vector": "cpp",
+        "__locale": "cpp",
+        "bitset": "cpp",
+        "initializer_list": "cpp",
+        "ios": "cpp",
+        "iosfwd": "cpp",
+        "istream": "cpp",
+        "limits": "cpp",
+        "locale": "cpp",
+        "mutex": "cpp",
+        "new": "cpp",
+        "optional": "cpp",
+        "queue": "cpp",
+        "stack": "cpp",
+        "streambuf": "cpp",
+        "typeinfo": "cpp",
+        "iterator": "cpp",
+        "__node_handle": "cpp"
+    }
+}
