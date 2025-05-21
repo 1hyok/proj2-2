@@ -21,6 +21,8 @@
         "typeinfo": "cpp",
         "iterator": "cpp",
         "__node_handle": "cpp",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "deque": "cpp",
+        "unordered_map": "cpp"
     }
 }

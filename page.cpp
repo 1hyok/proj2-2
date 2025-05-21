@@ -108,7 +108,41 @@ bool page::insert(char *key,uint64_t val){
 
 page* page::split(char *key, uint64_t val, char** parent_key){
 	// Please implement this function in project 3.
-	page *new_page;
+	page *new_page = new page(this->get_type());
+	
+	//일단 삽입
+	const size_t key_size = strlen(key) + 1;
+	const uint16_t record_size = sizeof(uint16_t) + key_size + sizeof(val);
+	uint16_t *off_arr = (uint16_t *)(hdr.get_offset_array());
+	hdr.set_data_region_off(hdr.get_data_region_off()-record_size);
+	const uint16_t offset = hdr.get_data_region_off() + 1;
+	put2byte((void *)((uint64_t)this + offset), record_size);
+	strcpy((char *)((uint64_t)this + offset + sizeof(record_size)), key);
+	*(uint64_t *)((uint64_t)this + offset + sizeof(record_size) + key_size) = val;
+		hdr.set_num_data(hdr.get_num_data() + 1);
+	const uint32_t num_data = hdr.get_num_data();
+	int insert_idx = num_data - 1;
+	for(int i = 0; i < num_data - 1; i++)
+		if(strcmp(get_key((void *)((uint64_t)this + off_arr[i])), key) >= 0){
+			insert_idx = i;
+			break;
+		}
+	for(int i = num_data - 1; i > insert_idx; i--)
+		off_arr[i] = off_arr[i-1];
+	off_arr[insert_idx] = offset;
+
+	uint16_t *new_off_arr = (uint16_t *)(new_page->hdr.get_offset_array());
+
+	for(int i = (hdr.get_num_data() + 1) / 2; i < hdr.get_num_data() + 1; i++){
+		const auto record = (void *)off_arr[i];
+		const auto key = get_key(record);
+		new_page->insert(key, get_val(key));
+	}
+
+	*parent_key = new_page->get_key((void *)((uint64_t)new_page + new_off_arr[0]));
+
+	defrag();
+
 	return new_page;
 }
 
@@ -138,6 +172,7 @@ void page::defrag(){
 
 	memcpy(this, new_page, sizeof(page));
 	hdr.set_offset_array((void*)((uint64_t)this+sizeof(slot_header)));
+
 	delete new_page;
 
 }
