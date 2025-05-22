@@ -13,5 +13,7 @@ void btree::insert(char *key, uint64_t val){
 uint64_t btree::lookup(char *key){
 	// Please implement this function in project 3.
 	uint64_t val = 0;
+	if(!root)return val;
+	val = root->find(key);
 	return val;
 }

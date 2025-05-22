@@ -54,13 +54,13 @@ uint64_t page::find(char *key){
 	auto curr_node = this;
 	while(curr_node){
 		auto curr_hdr = curr_node->hdr;
-		const auto *off_arr = (uint16_t *)(curr_hdr.get_offset_array());
+		const auto off_arr = (uint16_t *)(curr_hdr.get_offset_array());
 
 
 		int i;
 		char* curr_key;
 		for(i = 0; i < curr_hdr.get_num_data(); i++){
-			curr_key = get_key((void *)((uint64_t)curr_node + off_arr[i]));
+			curr_key = curr_node->get_key((void *)((uint64_t)curr_node + off_arr[i]));
 
 			if(curr_node->get_type() == LEAF){
 				if(strcmp(curr_key, key) > 0){
