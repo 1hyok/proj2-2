@@ -33,7 +33,7 @@ int main(){
 			printf("key :%s founds\n",key);		
 		}
 		else{
-			printf("key :%s Something wrong\n",key);		
+			printf("key :%s val :%llu Something wrong\n",key, val);		
 
 		}
 	}
