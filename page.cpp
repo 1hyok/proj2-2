@@ -97,10 +97,6 @@ bool page::insert(char *key,uint64_t val){
 		split(key, val, parent_key);
 		return false;
 	}
-	// if(find(key)){
-	// 	cout << "Redundancy! key:" << key << " val:" << val << "\n\n";
-	// 	return false;
-	// }
 		
 	uint16_t *off_arr = (uint16_t *)(hdr.get_offset_array());
 	hdr.set_data_region_off(hdr.get_data_region_off()-record_size);
@@ -160,7 +156,7 @@ page* page::split(char *key, uint64_t val, char** parent_key){
 		off_arr[i] = off_arr[i-1];
 	off_arr[insert_idx] = offset;
 	
-	const int mid_idx = (num_data + 1 + 1) / 2;
+	const int mid_idx = (num_data + 1) / 2;
 	*parent_key = strdup(get_key((void *)((uint64_t)this + off_arr[mid_idx])));
 
 	uint16_t *new_off_arr = (uint16_t *)(new_page->hdr.get_offset_array());
