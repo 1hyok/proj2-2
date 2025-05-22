@@ -35,9 +35,9 @@ void btree::insert(char *key, uint64_t val){
 		}
 		node_path.pop_back();
 
-		char** parent_key = nullptr;
-		val = (uint64_t)curr_node->split(key, val, parent_key);
-		key = *parent_key;
+		char* parent_key = nullptr;
+		val = (uint64_t)curr_node->split(key, val, &parent_key);
+		key = parent_key;
 	}
 	
 	auto tmp = root;
