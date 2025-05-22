@@ -48,45 +48,32 @@ page *page::get_leftmost_ptr(){
 }
 
 uint64_t page::find(char *key){
-	// Please implement this function in project 2.			
-			
+	// Please implement this function in project 2.						
 	uint64_t val = 0;
-	auto curr_node = this;
-	while(curr_node){
-		auto curr_hdr = curr_node->hdr;
-		const auto off_arr = (uint16_t *)(curr_hdr.get_offset_array());
+	const auto off_arr = (uint16_t *)(hdr.get_offset_array());
+	char* curr_key = nullptr;
 
+	for(int i = 0; i < hdr.get_num_data(); i++){
+		curr_key = get_key((void *)((uint64_t)this + off_arr[i]));
 
-		int i;
-		char* curr_key;
-		for(i = 0; i < curr_hdr.get_num_data(); i++){
-			curr_key = curr_node->get_key((void *)((uint64_t)curr_node + off_arr[i]));
-
-			if(curr_node->get_type() == LEAF){
-				if(strcmp(curr_key, key) > 0){
-					cout << "There's no key from leaf" << key << "\n\n";
-					return val;
-				}
-				if(strcmp(curr_key, key) == 0){
-					val = get_val((void *)curr_key);
-					cout << "\nFound Val:" << val << "\n";
-					return val;
-				}
-			}
+		if(get_type() == LEAF){
 			if(strcmp(curr_key, key) > 0){
-				if(i == 0){
-					curr_node = curr_node->get_leftmost_ptr();
-					break;
-				}
-				const auto prev_key = (void *)get_key((void *)((uint64_t)curr_node + off_arr[i - 1]));
-				curr_node = (page *)curr_node->get_val(prev_key);
-				break;
+				cout << "There's no key from leaf" << key << "\n\n";
+				return val;
+			}
+			if(strcmp(curr_key, key) == 0){
+				val = get_val((void *)curr_key);
+				cout << "\nFound Val:" << val << "\n";
+				return val;
 			}
 		}
-		if(strcmp(curr_key, key) <= 0){
-			curr_node = (page *)curr_node->get_val(curr_key);
+		if(strcmp(curr_key, key) > 0){
+			if(i == 0) return (uint64_t)get_leftmost_ptr();
+			const auto prev_key = (void *)get_key((void *)((uint64_t)this + off_arr[i - 1]));
+			return get_val(prev_key);
 		}
 	}
+	if(strcmp(curr_key, key) <= 0) return get_val(curr_key);
 
 	cout << "There's no key from internal" << key << "\n\n";
 	return val;
@@ -100,6 +87,8 @@ bool page::insert(char *key,uint64_t val){
 
 	if(is_full(record_size)){
 		cout << "Full! key:" << key << " val:" << val << "\n\n";
+		char** parent_key =nullptr;
+		split(key, val, parent_key);
 		return false;
 	}
 	if(find(key)){
@@ -135,11 +124,14 @@ bool page::insert(char *key,uint64_t val){
 
 page* page::split(char *key, uint64_t val, char** parent_key){
 	// Please implement this function in project 3.
+	// val은 리프에 넣을 레코드의 주소
 	page *new_page = new page(this->get_type());
 	
 	//일단 삽입
+	//크기
 	const size_t key_size = strlen(key) + 1;
 	const uint16_t record_size = sizeof(uint16_t) + key_size + sizeof(val);
+
 	uint16_t *off_arr = (uint16_t *)(hdr.get_offset_array());
 	
 	hdr.set_data_region_off(hdr.get_data_region_off() - record_size);
