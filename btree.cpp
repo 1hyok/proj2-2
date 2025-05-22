@@ -31,14 +31,20 @@ void btree::insert(char *key, uint64_t val){
 		curr_node = node_path.back();
 		if(!curr_node->is_full(record_size)){
 			curr_node->insert(key, val);
-			break;
+			return;
 		}
 		node_path.pop_back();
 
 		char** parent_key = nullptr;
-		curr_node->split(key, val, parent_key);
+		val = (uint64_t)curr_node->split(key, val, parent_key);
 		key = *parent_key;
 	}
+	
+	auto tmp = root;
+	root = new page(INTERNAL);
+	root->insert(key, val);
+	root->set_leftmost_ptr(tmp);
+	height++;
 }
 
 uint64_t btree::lookup(char *key){
