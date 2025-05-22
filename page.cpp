@@ -53,13 +53,19 @@ uint64_t page::find(char *key){
 	const auto off_arr = (uint16_t *)(hdr.get_offset_array());
 	char* curr_key = nullptr;
 
+	const auto num_data = hdr.get_num_data();
+	if(num_data == 0){
+		if(get_type() == LEAF) return 0;
+		return (uint64_t)get_leftmost_ptr();
+	}
+
 	for(int i = 0; i < hdr.get_num_data(); i++){
 		curr_key = get_key((void *)((uint64_t)this + off_arr[i]));
 
 		if(get_type() == LEAF){
 			if(strcmp(curr_key, key) > 0){
-				cout << "There's no key from leaf" << key << "\n\n";
-				return val;
+				cout << "There's no key " << key << "\n\n";
+				return 0;
 			}
 			if(strcmp(curr_key, key) == 0){
 				val = get_val((void *)curr_key);
@@ -67,16 +73,16 @@ uint64_t page::find(char *key){
 				return val;
 			}
 		}
-		if(strcmp(curr_key, key) > 0){
+
+		if(get_type() == INTERNAL && strcmp(curr_key, key) > 0){
 			if(i == 0) return (uint64_t)get_leftmost_ptr();
 			const auto prev_key = (void *)get_key((void *)((uint64_t)this + off_arr[i - 1]));
 			return get_val(prev_key);
 		}
 	}
-	if(strcmp(curr_key, key) <= 0) return get_val(curr_key);
-
-	cout << "There's no key from internal" << key << "\n\n";
-	return val;
+	if(get_type() == INTERNAL && strcmp(curr_key, key) <= 0) return get_val(curr_key);
+	cout << "There's no key " << key << "\n\n";
+	return 0;
 }
 
 bool page::insert(char *key,uint64_t val){
@@ -91,10 +97,10 @@ bool page::insert(char *key,uint64_t val){
 		split(key, val, parent_key);
 		return false;
 	}
-	if(find(key)){
-		cout << "Redundancy! key:" << key << " val:" << val << "\n\n";
-		return false;
-	}
+	// if(find(key)){
+	// 	cout << "Redundancy! key:" << key << " val:" << val << "\n\n";
+	// 	return false;
+	// }
 		
 	uint16_t *off_arr = (uint16_t *)(hdr.get_offset_array());
 	hdr.set_data_region_off(hdr.get_data_region_off()-record_size);
