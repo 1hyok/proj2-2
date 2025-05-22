@@ -90,18 +90,6 @@ uint64_t page::find(char *key){
 
 	cout << "There's no key from internal" << key << "\n\n";
 	return val;
-
-		// const uint16_t *off_arr = (uint16_t *)(hdr.get_offset_array());
-	// for(int i = 0; i < hdr.get_num_data(); i++){
-		// 	const char *curr = get_key((void *)((uint64_t)this + off_arr[i]));
-		// 	if(!strcmp(curr, key)){
-			// 		val = get_val((void *)curr);
-			// 		cout << "\nFound Val:" << val << "\n";
-			// 		return val;
-			// 	}
-			// }
-			// cout << "There's no key " << key << "\n\n";
-			// return val;
 }
 
 bool page::insert(char *key,uint64_t val){
