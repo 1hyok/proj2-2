@@ -24,7 +24,7 @@ Inserted 200 to key bbbbbbbbbbbbbbbbbbb
 
 Inserted 600 to key ccccccccccccccccccc
 
-Inserted 241509360 to key ddddddddddddddddddd
+Inserted 260383728 to key ddddddddddddddddddd
 
 Inserted 4032000 to key hhhhhhhhhhhhhhhhhhh
 
@@ -44,7 +44,7 @@ Inserted 12000 to key eeeeeeeeeeeeeeeeeee
 
 Inserted 72000 to key fffffffffffffffffff
 
-Inserted 241509936 to key ggggggggggggggggggg
+Inserted 260384304 to key ggggggggggggggggggg
 
 Inserted 3991680000 to key kkkkkkkkkkkkkkkkkkk
 
@@ -64,7 +64,7 @@ Inserted 4032000 to key hhhhhhhhhhhhhhhhhhh
 
 Inserted 36288000 to key iiiiiiiiiiiiiiiiiii
 
-Inserted 241510240 to key jjjjjjjjjjjjjjjjjjj
+Inserted 260384608 to key jjjjjjjjjjjjjjjjjjj
 
 Inserted 8717829120000 to key nnnnnnnnnnnnnnnnnnn
 
@@ -84,7 +84,7 @@ Inserted 3991680000 to key kkkkkkkkkkkkkkkkkkk
 
 Inserted 47900160000 to key lllllllllllllllllll
 
-Inserted 241510544 to key mmmmmmmmmmmmmmmmmmm
+Inserted 260384912 to key mmmmmmmmmmmmmmmmmmm
 
 Inserted 35568742809600000 to key qqqqqqqqqqqqqqqqqqq
 
@@ -104,7 +104,7 @@ Inserted 8717829120000 to key nnnnnnnnnnnnnnnnnnn
 
 Inserted 130767436800000 to key ooooooooooooooooooo
 
-Inserted 241510848 to key ppppppppppppppppppp
+Inserted 260385216 to key ppppppppppppppppppp
 
 Inserted 3482527859439828992 to key ttttttttttttttttttt
 
@@ -124,7 +124,7 @@ Inserted 35568742809600000 to key qqqqqqqqqqqqqqqqqqq
 
 Inserted 640237370572800000 to key rrrrrrrrrrrrrrrrrrr
 
-Inserted 241511152 to key sssssssssssssssssss
+Inserted 260385520 to key sssssssssssssssssss
 
 Inserted 1172422546262327296 to key wwwwwwwwwwwwwwwwwww
 
@@ -144,99 +144,34 @@ Inserted 3482527859439828992 to key ttttttttttttttttttt
 
 Inserted 17792852827107753984 to key uuuuuuuuuuuuuuuuuuu
 
-Inserted 241510544 to key mmmmmmmmmmmmmmmmmmm
+Inserted 260384912 to key mmmmmmmmmmmmmmmmmmm
 
-Inserted 241510848 to key ppppppppppppppppppp
+Inserted 260385216 to key ppppppppppppppppppp
 
-Inserted 241511152 to key sssssssssssssssssss
+Inserted 260385520 to key sssssssssssssssssss
 
-Inserted 241511456 to key vvvvvvvvvvvvvvvvvvv
+Inserted 260385824 to key vvvvvvvvvvvvvvvvvvv
 
-Inserted 241509360 to key ddddddddddddddddddd
+Inserted 260383728 to key ddddddddddddddddddd
 
-Inserted 241509936 to key ggggggggggggggggggg
+Inserted 260384304 to key ggggggggggggggggggg
 
-Inserted 241510240 to key jjjjjjjjjjjjjjjjjjj
+Inserted 260384608 to key jjjjjjjjjjjjjjjjjjj
 
-Inserted 241511760 to key mmmmmmmmmmmmmmmmmmm
+Inserted 260386128 to key mmmmmmmmmmmmmmmmmmm
 
 Inserted 9068344646140166144 to key zzzzzzzzzzzzzzzzzzz
 
+=== insertion complete, entering lookup ===
 
 Found Val:100
 key :aaaaaaaaaaaaaaaaaaa founds
+=== insertion complete, entering lookup ===
 
 Found Val:200
 key :bbbbbbbbbbbbbbbbbbb founds
+=== insertion complete, entering lookup ===
 
 Found Val:600
 key :ccccccccccccccccccc founds
-
-Found Val:2400
-key :ddddddddddddddddddd founds
-
-Found Val:12000
-key :eeeeeeeeeeeeeeeeeee founds
-
-Found Val:72000
-key :fffffffffffffffffff founds
-
-Found Val:504000
-key :ggggggggggggggggggg founds
-
-Found Val:4032000
-key :hhhhhhhhhhhhhhhhhhh founds
-
-Found Val:36288000
-key :iiiiiiiiiiiiiiiiiii founds
-
-Found Val:362880000
-key :jjjjjjjjjjjjjjjjjjj founds
-
-Found Val:3991680000
-key :kkkkkkkkkkkkkkkkkkk founds
-
-Found Val:47900160000
-key :lllllllllllllllllll founds
-
-Found Val:622702080000
-key :mmmmmmmmmmmmmmmmmmm founds
-
-Found Val:8717829120000
-key :nnnnnnnnnnnnnnnnnnn founds
-
-Found Val:130767436800000
-key :ooooooooooooooooooo founds
-
-Found Val:2092278988800000
-key :ppppppppppppppppppp founds
-
-Found Val:35568742809600000
-key :qqqqqqqqqqqqqqqqqqq founds
-
-Found Val:640237370572800000
-key :rrrrrrrrrrrrrrrrrrr founds
-
-Found Val:12164510040883200000
-key :sssssssssssssssssss founds
-
-Found Val:3482527859439828992
-key :ttttttttttttttttttt founds
-
-Found Val:17792852827107753984
-key :uuuuuuuuuuuuuuuuuuu founds
-
-Found Val:4061136648470003712
-key :vvvvvvvvvvvvvvvvvvv founds
-
-Found Val:1172422546262327296
-key :wwwwwwwwwwwwwwwwwww founds
-
-Found Val:9691397036586303488
-key :xxxxxxxxxxxxxxxxxxx founds
-
-Found Val:2477252956433416192
-key :yyyyyyyyyyyyyyyyyyy founds
-
-Found Val:9068344646140166144
-key :zzzzzzzzzzzzzzzzzzz founds
+=== insertion complete, entering lookup ===
